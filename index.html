@@ -1,35 +1,44 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Petit calendrier</title>
+  <title>Mon calendrier</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <main class="calendar">
-    <header class="calendar-header">
-      <h1 id="month-title">Calendrier</h1>
-    </header>
+  <div class="calendar">
 
-    <section class="weekdays">
-      <div>L</div>
-      <div>M</div>
-      <div>M</div>
-      <div>J</div>
-      <div>V</div>
-      <div>S</div>
-      <div>D</div>
-    </section>
+    <div class="calendar-header">
+      <button id="prevMonth">‹</button>
 
-    <section id="calendar-days" class="calendar-days">
-      <!-- Les jours seront ajoutés avec JavaScript -->
-    </section>
-  </main>
+      <h2 id="monthYear"></h2>
+
+      <button id="nextMonth">›</button>
+    </div>
+
+    <div class="weekdays">
+      <div>LUN</div>
+      <div>MAR</div>
+      <div>MER</div>
+      <div>JEU</div>
+      <div>VEN</div>
+      <div>SAM</div>
+      <div>DIM</div>
+    </div>
+
+    <div id="days" class="days"></div>
+
+  </div>
 
   <script src="script.js"></script>
+
 </body>
+
 </html>

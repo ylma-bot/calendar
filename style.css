@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+
+  background-color: #D6F0C7;
+
+  font-family: "Times New Roman", serif;
+  color: #D889AA;
+}
+
+/* CALENDRIER */
+
+.calendar {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+
+  background-color: #D6F0C7;
+
+  padding: 18px;
+}
+
+/* HEADER */
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+  font-weight: normal;
+  color: #D889AA;
+
+  text-transform: uppercase;
+}
+
+.calendar-header button {
+  border: none;
+  background: transparent;
+
+  color: #D889AA;
+
+  font-family: "Times New Roman", serif;
+  font-size: 28px;
+
+  cursor: pointer;
+
+  padding: 2px 10px;
+
+  transition: transform 0.2s ease;
+}
+
+.calendar-header button:hover {
+  transform: scale(1.15);
+}
+
+/* JOURS DE LA SEMAINE */
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  text-align: center;
+
+  margin-bottom: 8px;
+}
+
+.weekdays div {
+  font-size: 11px;
+  font-weight: bold;
+
+  color: #D889AA;
+}
+
+/* CASES */
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  gap: 5px;
+}
+
+.day {
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #D889AA;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.day:hover {
+  background-color: #EBC1D2;
+  transform: scale(1.05);
+}
+
+/* JOURS DU MOIS PRÉCÉDENT / SUIVANT */
+
+.other-month {
+  opacity: 0.35;
+}
+
+/* AUJOURD'HUI */
+
+.today {
+  background-color: #E6A9C0;
+
+  color: #ffffff;
+
+  font-weight: bold;
+}
+
+.today:hover {
+  background-color: #E6A9C0;
+}
+
+/* JOUR SÉLECTIONNÉ */
+
+.selected {
+  background-color: #C7E5B7;
+  box-shadow: inset 0 0 0 2px #D889AA;
+}

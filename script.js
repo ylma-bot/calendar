@@ -1,138 +1,44 @@
-const monthYear = document.getElementById("monthYear");
-const daysContainer = document.getElementById("days");
+const monthTitle = document.getElementById("month-title");
+const calendarDays = document.getElementById("calendar-days");
 
-const prevMonth = document.getElementById("prevMonth");
-const nextMonth = document.getElementById("nextMonth");
+const today = new Date();
 
-let currentDate = new Date();
+const currentYear = today.getFullYear();
+const currentMonth = today.getMonth();
+const currentDay = today.getDate();
 
-function renderCalendar() {
+const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
 
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
+const monthName = today.toLocaleDateString("fr-FR", {
+  month: "long",
+  year: "numeric"
+});
 
-  const firstDay = new Date(year, month, 1);
+monthTitle.textContent = monthName;
 
-  const lastDay = new Date(year, month + 1, 0);
+let firstDay = firstDayOfMonth.getDay();
 
-  const previousLastDay = new Date(year, month, 0);
+// En JavaScript, dimanche vaut 0.
+// On transforme le calendrier pour commencer par lundi.
+firstDay = firstDay === 0 ? 6 : firstDay - 1;
 
-  const firstDayIndex = (firstDay.getDay() + 6) % 7;
-
-  const lastDate = lastDay.getDate();
-
-  const previousLastDate = previousLastDay.getDate();
-
-  const totalDays = Math.ceil(
-    (firstDayIndex + lastDate) / 7
-  ) * 7;
-
-  const monthNames = [
-    "JANVIER",
-    "FÉVRIER",
-    "MARS",
-    "AVRIL",
-    "MAI",
-    "JUIN",
-    "JUILLET",
-    "AOÛT",
-    "SEPTEMBRE",
-    "OCTOBRE",
-    "NOVEMBRE",
-    "DÉCEMBRE"
-  ];
-
-  monthYear.textContent =
-    monthNames[month] + " " + year;
-
-  daysContainer.innerHTML = "";
-
-  const today = new Date();
-
-  /* JOURS DU MOIS PRÉCÉDENT */
-
-  for (let i = firstDayIndex - 1; i >= 0; i--) {
-
-    const day = document.createElement("div");
-
-    day.classList.add("day", "other-month");
-
-    day.textContent = previousLastDate - i;
-
-    daysContainer.appendChild(day);
-  }
-
-  /* JOURS DU MOIS */
-
-  for (let i = 1; i <= lastDate; i++) {
-
-    const day = document.createElement("div");
-
-    day.classList.add("day");
-
-    day.textContent = i;
-
-    if (
-      i === today.getDate() &&
-      month === today.getMonth() &&
-      year === today.getFullYear()
-    ) {
-      day.classList.add("today");
-    }
-
-    day.addEventListener("click", () => {
-
-      document
-        .querySelectorAll(".selected")
-        .forEach(el => el.classList.remove("selected"));
-
-      day.classList.add("selected");
-
-    });
-
-    daysContainer.appendChild(day);
-  }
-
-  /* JOURS DU MOIS SUIVANT */
-
-  const remaining =
-    totalDays - daysContainer.children.length;
-
-  for (let i = 1; i <= remaining; i++) {
-
-    const day = document.createElement("div");
-
-    day.classList.add("day", "other-month");
-
-    day.textContent = i;
-
-    daysContainer.appendChild(day);
-  }
+// Cases vides avant le premier jour du mois
+for (let i = 0; i < firstDay; i++) {
+  const emptyDay = document.createElement("div");
+  calendarDays.appendChild(emptyDay);
 }
 
+// Jours du mois
+for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
+  const dayElement = document.createElement("div");
 
-/* MOIS PRÉCÉDENT */
+  dayElement.classList.add("day");
+  dayElement.textContent = day;
 
-prevMonth.addEventListener("click", () => {
+  if (day === currentDay) {
+    dayElement.classList.add("today");
+  }
 
-  currentDate.setMonth(
-    currentDate.getMonth() - 1
-  );
-
-  renderCalendar();
-});
-
-
-/* MOIS SUIVANT */
-
-nextMonth.addEventListener("click", () => {
-
-  currentDate.setMonth(
-    currentDate.getMonth() + 1
-  );
-
-  renderCalendar();
-});
-
-
-renderCalendar();
+  calendarDays.appendChild(dayElement);
+}
